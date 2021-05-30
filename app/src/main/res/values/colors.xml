@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#FC6644</color>
+    <color name="colorPrimaryDark">#C03823</color>
     <color name="colorAccent">#03DAC5</color>
 
     <!-- Color for an earthquake with magnitude 0 and 2 -->

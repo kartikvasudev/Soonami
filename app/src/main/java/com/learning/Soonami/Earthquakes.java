@@ -1,9 +1,9 @@
 package com.learning.Soonami;
 
-import android.util.Log;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class Earthquakes {
     private String date;
@@ -29,18 +29,18 @@ public class Earthquakes {
         return url;
     }
 
-    public Earthquakes(long date, String place, double magnitude, String url) {
-        Date dateObject = new Date(date);
+    public Earthquakes(long timeInMilliseconds, String place, double magnitude, String url) {
+        Date dateObject = new Date(timeInMilliseconds);
         this.date = convertMillisecondsToDate(dateObject);
         this.time = convertMillisecondsToTime(dateObject);
         String[] strings = place.split(",");
         if(strings.length == 2)
         {
-            this.distance= strings[0];
-            this.place = strings[1];
+            this.distance= strings[0].trim();
+            this.place = strings[1].trim();
         }
         else {
-            this.place = "";
+            this.distance = "";
             this.place = strings[strings.length - 1];
         }
         this.magnitude = magnitude;
@@ -56,12 +56,14 @@ public class Earthquakes {
     }
 
     private String convertMillisecondsToDate(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM DD, YYYY");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM DD, YYYY", Locale.getDefault());
+        simpleDateFormat.setTimeZone (TimeZone.getDefault());
         return simpleDateFormat.format(date);
     }
 
     private String convertMillisecondsToTime(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm a");
+        SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("h:mm a",Locale.getDefault());
+        simpleDateFormat.setTimeZone (TimeZone.getDefault());
         return simpleDateFormat.format(date);
     }
 
