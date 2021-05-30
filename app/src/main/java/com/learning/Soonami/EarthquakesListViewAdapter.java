@@ -12,24 +12,24 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
-class CustomListViewAdapter extends BaseAdapter {
+class EarthquakesListViewAdapter extends BaseAdapter {
 
-    private ArrayList<Earthquakes> earthquakesArrayList;
+    private ArrayList<EarthquakesModel> earthquakesModelArrayList;
     private Context context;
 
-    public CustomListViewAdapter(Context context, ArrayList<Earthquakes> earthquakesArrayList) {
+    public EarthquakesListViewAdapter(Context context, ArrayList<EarthquakesModel> earthquakesModelArrayList) {
         this.context = context;
-        this.earthquakesArrayList = earthquakesArrayList;
+        this.earthquakesModelArrayList = earthquakesModelArrayList;
     }
 
     @Override
     public int getCount() {
-        return earthquakesArrayList.size();
+        return earthquakesModelArrayList.size();
     }
 
     @Override
-    public Earthquakes getItem(int i) {
-        return earthquakesArrayList.get(i);
+    public EarthquakesModel getItem(int i) {
+        return earthquakesModelArrayList.get(i);
     }
 
     @Override

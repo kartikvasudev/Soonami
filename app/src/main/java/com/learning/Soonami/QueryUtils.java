@@ -35,13 +35,13 @@ public final class QueryUtils {
     }
 
     /**
-     * Return a list of {@link Earthquakes} objects that has been built up from
+     * Return a list of {@link EarthquakesModel} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<Earthquakes> extractEarthquakes(String response) throws JSONException {
+    public static ArrayList<EarthquakesModel> extractEarthquakes(String response) throws JSONException {
 
         // Create an empty ArrayList that we can start adding earthquakess to
-        ArrayList<Earthquakes> earthquakes = new ArrayList<>();
+        ArrayList<EarthquakesModel> earthquakes = new ArrayList<>();
         if(response == null) {
             Log.d(QueryUtils.class.getSimpleName(),"Response is null");
             response = SAMPLE_JSON_RESPONSE;
@@ -57,7 +57,7 @@ public final class QueryUtils {
             long date = properties.getLong("time");
             String place = properties.getString("place");
             String url = properties.getString("url");
-            earthquakes.add(new Earthquakes(date,place,magnitude,url));
+            earthquakes.add(new EarthquakesModel(date,place,magnitude,url));
         }
 
         // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON

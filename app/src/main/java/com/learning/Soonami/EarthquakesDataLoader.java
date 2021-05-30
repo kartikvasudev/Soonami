@@ -1,7 +1,6 @@
 package com.learning.Soonami;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -18,7 +17,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class EarthquakesDataLoader extends AsyncTaskLoader<ArrayList<Earthquakes>> {
+public class EarthquakesDataLoader extends AsyncTaskLoader<ArrayList<EarthquakesModel>> {
 
     private static final String TAG = EarthquakesDataLoader.class.getSimpleName();
     private static String USGS_REQUEST_URL = null;
@@ -31,8 +30,8 @@ public class EarthquakesDataLoader extends AsyncTaskLoader<ArrayList<Earthquakes
 
     @Nullable
     @Override
-    public ArrayList<Earthquakes> loadInBackground() {
-        ArrayList<Earthquakes> earthquakes = null;
+    public ArrayList<EarthquakesModel> loadInBackground() {
+        ArrayList<EarthquakesModel> earthquakes = null;
         try {
 //            Thread.sleep(2000);
             URL url = new URL(USGS_REQUEST_URL);
@@ -89,7 +88,7 @@ public class EarthquakesDataLoader extends AsyncTaskLoader<ArrayList<Earthquakes
         return output.toString();
     }
 
-    private ArrayList<Earthquakes> extractEarthquakesFromJSON(String response) throws JSONException {
+    private ArrayList<EarthquakesModel> extractEarthquakesFromJSON(String response) throws JSONException {
         return QueryUtils.extractEarthquakes(response);
     }
 }

@@ -20,16 +20,16 @@ import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements androidx.loader.app.LoaderManager.LoaderCallbacks<ArrayList<Earthquakes>> {
+public class EarthquakesActivity extends AppCompatActivity implements androidx.loader.app.LoaderManager.LoaderCallbacks<ArrayList<EarthquakesModel>> {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = EarthquakesActivity.class.getSimpleName();
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=2014-01-02";
 
     private ListView lv_earthquakes;
     private TextView tv_empty_view;
     private ProgressBar pb;
-    private CustomListViewAdapter adapter = null;
+    private EarthquakesListViewAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity implements androidx.loader.a
             tv_empty_view.setText(R.string.no_internet);
         }
 
-        adapter = new CustomListViewAdapter(this,new ArrayList<Earthquakes>());
+        adapter = new EarthquakesListViewAdapter(this,new ArrayList<EarthquakesModel>());
         lv_earthquakes.setAdapter(adapter);
 
         lv_earthquakes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Earthquakes earthquake = (Earthquakes) adapterView.getAdapter().getItem(i);
+                EarthquakesModel earthquake = (EarthquakesModel) adapterView.getAdapter().getItem(i);
                 String url = earthquake.getUrl();
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
@@ -74,13 +74,13 @@ public class MainActivity extends AppCompatActivity implements androidx.loader.a
 
     }
 
-    private void updateUi(ArrayList<Earthquakes> earthquakes)
+    private void updateUi(ArrayList<EarthquakesModel> earthquakes)
     {
         pb.setVisibility(View.GONE);
         if(earthquakes!=null)
         {
             lv_earthquakes.setVisibility(View.VISIBLE);
-            adapter = new CustomListViewAdapter(this ,earthquakes);
+            adapter = new EarthquakesListViewAdapter(this ,earthquakes);
             lv_earthquakes.setAdapter(adapter);
         }
         else
@@ -92,17 +92,17 @@ public class MainActivity extends AppCompatActivity implements androidx.loader.a
 
     @NonNull
     @Override
-    public Loader<ArrayList<Earthquakes>> onCreateLoader(int id, @Nullable Bundle args) {
+    public Loader<ArrayList<EarthquakesModel>> onCreateLoader(int id, @Nullable Bundle args) {
         return new EarthquakesDataLoader(this,USGS_REQUEST_URL);
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<ArrayList<Earthquakes>> loader, ArrayList<Earthquakes> data) {
+    public void onLoadFinished(@NonNull Loader<ArrayList<EarthquakesModel>> loader, ArrayList<EarthquakesModel> data) {
         updateUi(data);
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<ArrayList<Earthquakes>> loader) {
-        adapter = new CustomListViewAdapter(this,new ArrayList<Earthquakes>());
+    public void onLoaderReset(@NonNull Loader<ArrayList<EarthquakesModel>> loader) {
+        adapter = new EarthquakesListViewAdapter(this,new ArrayList<EarthquakesModel>());
     }
 }

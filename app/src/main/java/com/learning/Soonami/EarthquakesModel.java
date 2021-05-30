@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Earthquakes {
+public class EarthquakesModel {
     private String date;
     private String time;
     private String distance;
@@ -29,7 +29,7 @@ public class Earthquakes {
         return url;
     }
 
-    public Earthquakes(long timeInMilliseconds, String place, double magnitude, String url) {
+    public EarthquakesModel(long timeInMilliseconds, String place, double magnitude, String url) {
         Date dateObject = new Date(timeInMilliseconds);
         this.date = convertMillisecondsToDate(dateObject);
         this.time = convertMillisecondsToTime(dateObject);
